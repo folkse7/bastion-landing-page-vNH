@@ -35,7 +35,7 @@ export function Hero() {
           {/* Left - Content */}
           <div>
             {/* Badge */}
-            <div 
+            {/* <div 
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-8 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
               <span className="relative flex h-2 w-2">
@@ -43,7 +43,7 @@ export function Hero() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
               </span>
               <span className="text-sm text-purple-300 font-medium">Now in Early Access</span>
-            </div>
+            </div> */}
             
             {/* Main Headline */}
             <h1 
@@ -61,7 +61,7 @@ export function Hero() {
               className={`mt-6 text-lg lg:text-xl text-zinc-400 leading-relaxed max-w-xl text-pretty transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ transitionDelay: '200ms' }}
             >
-              Bastion gives VC and PE teams a single source of truth for portfolio company metrics — powered by AI, delivered where you already work.
+              Bastion gives VC and PE teams a single source of truth for all portfolio company related data, designed for your existing workflows.
             </p>
             
             {/* CTAs */}
@@ -69,7 +69,7 @@ export function Hero() {
               className={`mt-8 flex flex-col sm:flex-row gap-4 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ transitionDelay: '300ms' }}
             >
-              <a
+              {/* <a
                 href="#contact"
                 className="group relative inline-flex items-center justify-center"
               >
@@ -80,9 +80,9 @@ export function Hero() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
-              </a>
+              </a> */}
               <a
-                href="#demo"
+                href="https://cal.com/omgole"
                 className="group inline-flex items-center justify-center gap-2 border border-zinc-700 hover:border-purple-500/50 text-white px-8 py-4 rounded-full font-semibold hover:bg-purple-500/5 transition-all duration-300"
               >
                 <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +94,7 @@ export function Hero() {
             </div>
             
             {/* Stats */}
-            <div 
+            {/* <div 
               className={`mt-12 grid grid-cols-3 gap-4 lg:gap-6 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ transitionDelay: '400ms' }}
             >
@@ -108,7 +108,7 @@ export function Hero() {
                   <div className="text-xs lg:text-sm text-zinc-500">{stat.label}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Right - Image/Dashboard Preview */}

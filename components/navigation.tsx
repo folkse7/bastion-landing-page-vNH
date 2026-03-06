@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 function ShieldIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -53,10 +53,13 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <ShieldIcon className="w-8 h-8 text-purple-500 transition-transform group-hover:scale-110" />
-              <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
+            <Image
+  src="/WhiteBastion.png"
+  alt="Bastion Logo"
+  width={36}
+  height={36}
+  className="transition-transform group-hover:scale-110"
+/>
             <span className="text-xl font-bold text-white tracking-tight">Bastion</span>
           </a>
 
@@ -77,7 +80,7 @@ export function Navigation() {
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
             <a
-              href="#contact"
+              href="https://cal.com/omgole"
               className="relative group"
             >
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse-glow" />
@@ -122,7 +125,7 @@ export function Navigation() {
               ))}
               <hr className="border-white/5 my-2" />
               <a
-                href="#contact"
+                href="https://cal.com/omgole"
                 className="mx-4 mt-2 text-center bg-gradient-to-r from-purple-600 to-violet-600 text-white px-5 py-3 rounded-full font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
