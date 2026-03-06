@@ -43,87 +43,64 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-sm"
+          ? "bg-[#0a0a0c]/80 backdrop-blur-2xl border-b border-white/5"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <ShieldIcon className="w-8 h-8 text-accent" />
-            <span className="text-xl font-bold text-foreground">Bastion</span>
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="relative">
+              <ShieldIcon className="w-8 h-8 text-purple-500 transition-transform group-hover:scale-110" />
+              <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <span className="text-xl font-bold text-white tracking-tight">Bastion</span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
+            {["About", "Product", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="relative px-4 py-2 text-sm text-zinc-400 hover:text-white transition-colors font-medium group"
+              >
+                {item}
+                <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-purple-500/0 via-purple-500/70 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center">
             <a
-              href="#features"
-              className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+              href="#contact"
+              className="relative group"
             >
-              About
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-            >
-              Product
-            </a>
-            <a
-              href="#comparison"
-              className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-            >
-              Contact
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse-glow" />
+              <div className="relative px-5 py-2.5 bg-gradient-to-r from-purple-600 to-violet-600 rounded-full text-sm font-semibold text-white flex items-center gap-2 animate-gradient bg-[length:200%_200%]">
+                Book a Demo
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
             </a>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-  <a
-    href="#cta"
-    className="
-    relative inline-flex items-center gap-2
-    px-6 py-3 rounded-xl font-semibold text-white
-    bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-    bg-[length:200%_200%]
-    animate-gradient
-    hover:scale-[1.02]
-    transition-all duration-300
-    shadow-[0_0_20px_rgba(139,92,246,0.5)]
-    "
-  >
-    Try the Product →
-  </a>
-</div>
-
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden relative p-2 text-zinc-400 hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <svg
-              className="w-6 h-6 text-primary"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
@@ -131,47 +108,26 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-background border-t border-border py-4">
-            <div className="flex flex-col gap-4">
-              <a
-                href="#features"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium px-4"
-              >
-                Product
-              </a>
-              <a
-                href="#how-it-works"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium px-4"
-              >
-                Features
-              </a>
-              <a
-                href="#comparison"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium px-4"
-              >
-                Pricing
-              </a>
-              <a
-                href="#cta"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium px-4"
-              >
-                About
-              </a>
-              <hr className="border-border" />
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium px-4"
-              >
-                Log In
-              </a>
-              <div className="px-4">
+          <div className="md:hidden bg-[#0a0a0c]/95 backdrop-blur-2xl border-t border-white/5 py-4 -mx-6 px-6">
+            <div className="flex flex-col gap-1">
+              {["About", "Product", "Contact"].map((item) => (
                 <a
-                  href="#cta"
-                  className="block text-center bg-accent text-accent-foreground px-5 py-2.5 rounded-lg font-semibold hover:bg-accent/90 transition-colors"
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
-                  Request Access
+                  {item}
                 </a>
-              </div>
+              ))}
+              <hr className="border-white/5 my-2" />
+              <a
+                href="#contact"
+                className="mx-4 mt-2 text-center bg-gradient-to-r from-purple-600 to-violet-600 text-white px-5 py-3 rounded-full font-semibold"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Book a Demo
+              </a>
             </div>
           </div>
         )}
