@@ -57,9 +57,17 @@ const features = [
 
 export function FeatureSections() {
   return (
-    <section id="features" className="py-20 lg:py-28 bg-secondary/30">
+    <section id="product" className="py-24 lg:py-32 bg-background relative overflow-hidden">
+      {/* Subtle background effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-purple-500/5 rounded-full blur-[150px]" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium mb-6 border border-purple-500/20">
+            Features
+          </span>
           <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
             Everything you need for
             <span className="block mt-1 bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
@@ -75,15 +83,29 @@ export function FeatureSections() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative bg-card rounded-2xl border border-border p-6 hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/5"
+              className="group relative rounded-2xl border border-border p-6 hover:border-purple-500/50 transition-all duration-500"
+              style={{
+                background: 'linear-gradient(135deg, rgba(24,24,27,0.8) 0%, rgba(39,39,42,0.4) 100%)',
+                transform: 'perspective(1000px)',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+              }}
             >
-              <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-400 mb-4 group-hover:bg-purple-500/20 transition-colors">
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-violet-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div 
+                className="relative z-10 w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-400 mb-5 group-hover:bg-purple-500/20 transition-all duration-300 border border-purple-500/20"
+                style={{
+                  transform: 'perspective(500px) rotateX(10deg)',
+                  boxShadow: '0 10px 20px rgba(168,85,247,0.1)'
+                }}
+              >
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+              <h3 className="relative z-10 text-lg font-semibold text-foreground mb-2">
                 {feature.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="relative z-10 text-sm text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>
