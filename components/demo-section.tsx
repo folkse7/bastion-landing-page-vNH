@@ -347,27 +347,6 @@ export function DemoSection() {
         </div>
       </div>
 
-      {/* Progress Indicator - Fixed on side */}
-      <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col gap-3 z-50">
-        {demoSlides.map((slide, index) => (
-          <button
-            key={slide.id}
-            onClick={() => {
-              slideRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }}
-            className="group flex items-center gap-3"
-          >
-            <span className={`text-xs font-medium transition-all duration-300 opacity-0 group-hover:opacity-100 ${activeSlide === index ? 'text-purple-400' : 'text-zinc-500'}`}>
-              {slide.title}
-            </span>
-            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              activeSlide === index
-                ? 'bg-purple-500 scale-125'
-                : 'bg-zinc-700 group-hover:bg-zinc-500'
-            }`} />
-          </button>
-        ))}
-      </div>
     </section>
   );
 }
