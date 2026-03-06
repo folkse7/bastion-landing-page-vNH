@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const features = [
   {
     icon: (
@@ -6,7 +10,8 @@ const features = [
       </svg>
     ),
     title: "Unified Dashboard",
-    description: "See revenue, EBITDA, runway, and custom KPIs across your entire portfolio at a glance with real-time updates.",
+    description: "See revenue, EBITDA, runway, and custom KPIs across your entire portfolio at a glance.",
+    metric: "Real-time",
   },
   {
     icon: (
@@ -15,7 +20,8 @@ const features = [
       </svg>
     ),
     title: "Excel Integration",
-    description: "Native Excel add-in syncs live data directly into your existing spreadsheets. Use =BASTION() formulas anywhere.",
+    description: "Native Excel add-in syncs live data directly into your existing spreadsheets.",
+    metric: "=BASTION()",
   },
   {
     icon: (
@@ -24,7 +30,8 @@ const features = [
       </svg>
     ),
     title: "AI Document Processing",
-    description: "Forward board decks and reports to your inbox. AI extracts KPIs and generates summaries automatically.",
+    description: "Forward board decks and reports to your inbox. AI extracts KPIs automatically.",
+    metric: "10x faster",
   },
   {
     icon: (
@@ -33,7 +40,8 @@ const features = [
       </svg>
     ),
     title: "Smart Alerts",
-    description: "Get proactive notifications for missing updates, declining metrics, and data inconsistencies.",
+    description: "Get proactive notifications for missing updates and declining metrics.",
+    metric: "Proactive",
   },
   {
     icon: (
@@ -42,7 +50,8 @@ const features = [
       </svg>
     ),
     title: "Data Lineage",
-    description: "Every data point is traced back to its source document for full audit trails and compliance.",
+    description: "Every data point is traced back to its source document for full audit trails.",
+    metric: "100% tracked",
   },
   {
     icon: (
@@ -51,63 +60,133 @@ const features = [
       </svg>
     ),
     title: "Team Collaboration",
-    description: "Share insights across your team with role-based access controls and collaborative workflows.",
+    description: "Share insights across your team with role-based access controls.",
+    metric: "Secure",
   },
 ];
 
 export function FeatureSections() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="product" className="py-24 lg:py-32 bg-background relative overflow-hidden">
-      {/* Subtle background effects */}
+    <section id="product" className="py-24 lg:py-32 bg-[#08080a] relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-purple-500/5 rounded-full blur-[150px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/5 rounded-full blur-[180px]" />
+        <div 
+          className="absolute inset-0 opacity-30" 
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(168,85,247,0.08) 1px, transparent 0)`,
+            backgroundSize: '48px 48px'
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={containerRef} className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium mb-6 border border-purple-500/20">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium mb-6 border border-purple-500/20">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
             Features
           </span>
-          <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4 text-balance">
             Everything you need for
-            <span className="block mt-1 bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="block mt-1 bg-gradient-to-r from-purple-400 via-purple-300 to-violet-400 bg-clip-text text-transparent">
               portfolio intelligence
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
             Powerful features designed specifically for VC and PE teams
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative rounded-2xl border border-border p-6 hover:border-purple-500/50 transition-all duration-500"
-              style={{
-                background: 'linear-gradient(135deg, rgba(24,24,27,0.8) 0%, rgba(39,39,42,0.4) 100%)',
-                transform: 'perspective(1000px)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+              className={`group relative rounded-2xl p-6 transition-all duration-500 cursor-pointer ${
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ 
+                transitionDelay: `${index * 100}ms`,
+                background: hoveredIndex === index 
+                  ? 'linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(139,92,246,0.05) 100%)' 
+                  : 'linear-gradient(135deg, rgba(24,24,27,0.6) 0%, rgba(24,24,27,0.3) 100%)',
               }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Hover glow effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-violet-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+              {/* Border */}
               <div 
-                className="relative z-10 w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-400 mb-5 group-hover:bg-purple-500/20 transition-all duration-300 border border-purple-500/20"
+                className="absolute inset-0 rounded-2xl border transition-all duration-300"
                 style={{
-                  transform: 'perspective(500px) rotateX(10deg)',
-                  boxShadow: '0 10px 20px rgba(168,85,247,0.1)'
+                  borderColor: hoveredIndex === index ? 'rgba(168,85,247,0.4)' : 'rgba(63,63,70,0.5)',
                 }}
-              >
-                {feature.icon}
+              />
+              
+              {/* Glow Effect */}
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                style={{
+                  boxShadow: '0 0 60px rgba(168,85,247,0.15)',
+                }}
+              />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                {/* Icon */}
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-purple-400 mb-4 transition-all duration-300"
+                  style={{
+                    background: hoveredIndex === index 
+                      ? 'linear-gradient(135deg, rgba(168,85,247,0.2) 0%, rgba(139,92,246,0.1) 100%)' 
+                      : 'rgba(168,85,247,0.1)',
+                    border: `1px solid ${hoveredIndex === index ? 'rgba(168,85,247,0.3)' : 'rgba(168,85,247,0.15)'}`,
+                    transform: hoveredIndex === index ? 'scale(1.1) rotateZ(-5deg)' : 'scale(1)',
+                  }}
+                >
+                  {feature.icon}
+                </div>
+                
+                {/* Title & Metric */}
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="text-lg font-semibold text-white">
+                    {feature.title}
+                  </h3>
+                  <span className="px-2 py-0.5 text-xs font-medium bg-purple-500/10 text-purple-400 rounded-full border border-purple-500/20">
+                    {feature.metric}
+                  </span>
+                </div>
+                
+                {/* Description */}
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="relative z-10 text-lg font-semibold text-foreground mb-2">
-                {feature.title}
-              </h3>
-              <p className="relative z-10 text-sm text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
             </div>
           ))}
         </div>
